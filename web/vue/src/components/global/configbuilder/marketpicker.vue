@@ -63,15 +63,15 @@ export default {
       return exchanges;
     },
     markets: function() {
-      return this.exchanges ? this.exchanges[ this.exchange ] : null;
+      return _.get(this.exchanges, this.exchange, null );
     },
 
     assets: function() {
-      return this.exchanges ? this.exchanges[this.exchange].markets[this.currency] : null;
+      return _.get(this.exchanges, [this.exchange, 'markets', this.currency], null );
     },
 
     currencies: function() {
-      return this.exchanges ? _.keys( this.exchanges[this.exchange].markets ) : null;
+      return _.keys(_.get(this.exchanges, [this.exchange, 'markets' ], null ) );
     },
     watchConfig: function() {
       return {
